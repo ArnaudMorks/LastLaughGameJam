@@ -1034,13 +1034,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Warrior_Sheet-Effect_44
+      name: Warrior_Sheet-Jump_3
       rect:
         serializedVersion: 2
-        x: 138
-        y: 396
-        width: 69
-        height: 44
+        x: 157
+        y: 400
+        width: 20
+        height: 33
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1460,7 +1460,7 @@ TextureImporter:
         x: 292
         y: 265
         width: 21
-        height: 23
+        height: 33
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2238,7 +2238,6 @@ TextureImporter:
       Warrior_Sheet-Effect_41: 1251376648
       Warrior_Sheet-Effect_42: -260751842
       Warrior_Sheet-Effect_43: 823657819
-      Warrior_Sheet-Effect_44: -437363013
       Warrior_Sheet-Effect_45: -1275677784
       Warrior_Sheet-Effect_46: 1876737614
       Warrior_Sheet-Effect_47: -1511224865
@@ -2297,6 +2296,7 @@ TextureImporter:
       Warrior_Sheet-Effect_96: -1467691056
       Warrior_Sheet-Effect_97: -941397693
       Warrior_Sheet-Effect_98: 1180687260
+      Warrior_Sheet-Jump_3: -437363013
       Warrior_Sheet-Standing_0: 1043591525
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0

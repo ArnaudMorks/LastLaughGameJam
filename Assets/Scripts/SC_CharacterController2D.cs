@@ -2,7 +2,9 @@ using UnityEngine;
 
 public class SC_CharacterController2D : MonoBehaviour
 {
-    [SerializeField] private float runSpeed = 0.6f; // Running speed.
+    [SerializeField] private float runSpeedBase;    //standaard loopsnelheid (als je gewoon staat)
+    [SerializeField] private float runSpeedBaseChrouched;
+    [SerializeField] private float runSpeed; // Running speed.
     [SerializeField] private float jumpForce = 2.6f; // Jump height.
 
     [SerializeField] private SpriteRenderer spriteRenderer;
@@ -15,6 +17,7 @@ public class SC_CharacterController2D : MonoBehaviour
     private Animator animator; // Variable for the Animator component. [OPTIONAL]
     //public Transform transform;
 
+    private bool canLand = false;     //voor als die geland is
     private bool isGrounded; // Variable that will check if character is on the ground.
     [SerializeField] private GameObject groundCheckPoint; // The object through which the isGrounded check is performed.
     [SerializeField] private float groundCheckRadius; // isGrounded check radius.
@@ -41,6 +44,7 @@ public class SC_CharacterController2D : MonoBehaviour
         animator = GetComponent<Animator>(); // Setting the Animator component. [OPTIONAL]
 
         jumpCoolDown = jumpCoolDownBase;    //een "Base" van iets is de standaard waarde; zodat deze later weer opgehaald kan worden
+        runSpeed = runSpeedBase;
     }
 
     // Update() is called every frame.
@@ -62,7 +66,20 @@ public class SC_CharacterController2D : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.LeftControl))
         {
+            crouchingHitbox.enabled = true;
+            standingHitbox.enabled = false;
+            runSpeed = runSpeedBaseChrouched;       //verandert de loopsnelheid
 
+            if (canLand == false) { spriteRenderer.sprite = chrouchingSprite; }     //verandert alleen naar de juiste sprite als je niet aan het vallen bent
+        }
+
+        if (Input.GetKeyUp(KeyCode.LeftControl))
+        {
+            crouchingHitbox.enabled = false;
+            standingHitbox.enabled = true;
+            runSpeed = runSpeedBase;                //verandert de loopsnelheid
+
+            if (canLand == false) { spriteRenderer.sprite = standingSprite; }       //verandert alleen naar de juiste sprite als je niet aan het vallen bent
         }
 
 
@@ -76,6 +93,20 @@ public class SC_CharacterController2D : MonoBehaviour
             canJump = true;
             jumpCoolDown = jumpCoolDownBase;
             print("Can jump again");
+        }
+
+        if (canLand && isGrounded && canJump)       //gebeurd zodra je geland bent (misschien "canJump" weg)
+        {
+            if (Input.GetKey(KeyCode.LeftControl))
+            {
+                spriteRenderer.sprite = chrouchingSprite;
+            }
+            else
+            {
+                spriteRenderer.sprite = standingSprite;
+            }
+
+            canLand = false;
         }
     }
 
@@ -95,6 +126,15 @@ public class SC_CharacterController2D : MonoBehaviour
         }
         else body.velocity = new Vector2(0, body.velocity.y);
 
+
+        if (movementX == 1)     //tijdelijk om te draaien; gaat later via animation waarschijnlijk
+        {
+            transform.eulerAngles = new Vector3(transform.eulerAngles.x, 0, transform.eulerAngles.z); // Rotating the character object to the right.
+        }
+        else if (movementX == -1)
+        {
+            transform.eulerAngles = new Vector3(transform.eulerAngles.x, 180, transform.eulerAngles.z); // Rotating the character object to the left.
+        }
 /*        // Left/Right movement.
         if (APressed)
         {
@@ -135,6 +175,8 @@ public class SC_CharacterController2D : MonoBehaviour
     {      // Jumps.
         print("Jumping");
         body.velocity = new Vector2(0, jumpForce); // Jump physics.
+        spriteRenderer.sprite = jumpSprite; // Setting the sprite.      Later niet voor bij springen maar als je valt de sprite veranderen (misschien in de animatie tho)
+        canLand = true;
     }
     // Makes sure you dont keep entering the clossets.
 

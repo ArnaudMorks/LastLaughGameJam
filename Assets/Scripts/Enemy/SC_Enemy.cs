@@ -19,8 +19,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float rightSide = 5f;
     private bool goLeft;
 
-    private bool APressed = false; // Variable that will check is "A" key is pressed.
-    private bool DPressed = false; // Variable that will check is "D" key is pressed.
+    private bool goingLeft = false; // Variable that will check is "A" key is pressed.
+    private bool goingRight = false; // Variable that will check is "D" key is pressed.
 
     void Start()
     {
@@ -49,7 +49,7 @@ public class Enemy : MonoBehaviour
         if (myCurrentXLocation < rightSide && goLeft == true)
         {
 
-            DPressed = true; // Checking on "A" key pressed.
+            goingRight = true; // Checking on "A" key pressed.
         }
         if (myCurrentXLocation > rightSide)
         {
@@ -58,8 +58,8 @@ public class Enemy : MonoBehaviour
         
         if (myCurrentXLocation > leftSide && goLeft == false)
         {
-            
-            APressed = true; // Checking on "A" key pressed.
+
+            goingLeft = true; // Checking on "A" key pressed.
         }
         
         if (myCurrentXLocation < leftSide)
@@ -107,11 +107,11 @@ public class Enemy : MonoBehaviour
 
         if (myCurrentXLocation >= centerSide)
         {
-            APressed = true; // Checking on "A" key pressed.
+            goingLeft = true; // Checking on "A" key pressed.
         }
         if (myCurrentXLocation <= centerSide)
         {
-            DPressed = true; // Checking on "A" key pressed.
+            goingRight = true; // Checking on "A" key pressed.
         }
 
 
@@ -122,17 +122,17 @@ public class Enemy : MonoBehaviour
     {
 
         // Left/Right movement.
-        if (APressed)
+        if (goingLeft)
         {
             body.velocity = new Vector2(-runSpeed, body.velocity.y); // Move left physics.
             transform.eulerAngles = new Vector3(transform.eulerAngles.x, 180, transform.eulerAngles.z); // Rotating the character object to the left.
-            APressed = false; // Returning initial value.
+            goingLeft = false; // Returning initial value.
         }
-        else if (DPressed)
+        else if (goingRight)
         {
             body.velocity = new Vector2(runSpeed, body.velocity.y); // Move right physics.
             transform.eulerAngles = new Vector3(transform.eulerAngles.x, 0, transform.eulerAngles.z); // Rotating the character object to the right.
-            DPressed = false; // Returning initial value.
+            goingRight = false; // Returning initial value.
         }
         else body.velocity = new Vector2(0, body.velocity.y);
     }

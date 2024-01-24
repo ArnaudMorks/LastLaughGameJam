@@ -11,7 +11,7 @@ public class SC_Closset : MonoBehaviour
     [SerializeField] private SpriteRenderer openDoorsSprite;
 
     private bool inCloset = false;
-    private bool APressed = false;
+    private bool APressed = false;                  //Wil het veranderen naar Input Manager settings, want dan kan je ook uitstappen met pijltjes toetsen (kost ook minder code)
     private bool DPressed = false;
     private bool EPressed = false;
     private bool nearClosset = false;
