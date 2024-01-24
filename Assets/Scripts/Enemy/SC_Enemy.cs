@@ -4,25 +4,25 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public float runSpeed = 0.6f; // Running speed.
-    public float jumpForce = 2.6f; // Jump height.
+    [SerializeField] private float runSpeed = 0.6f; // Running speed.
+   // [SerializeField] private float jumpForce = 2.6f; // Jump height.      WAARSCHIJNLIJK NIET NODIG
 
     private Rigidbody2D body; // Variable for the RigidBody2D component.
     //private Animator animator; // Variable for the Animator component. [OPTIONAL]
-    public GameObject myLocation;
-    public Transform myXLocation;
+    [SerializeField] private GameObject myLocation;
+    [SerializeField] private Transform myXLocation;
     private float myCurrentXLocation;
 
 
-    public float centerSide = 0;
-    public float leftSide = -5f;
-    public float rightSide = 5f;
+    [SerializeField] private float centerSide = 0;
+    [SerializeField] private float leftSide = -5f;
+    [SerializeField] private float rightSide = 5f;
     private bool goLeft;
 
     private bool APressed = false; // Variable that will check is "A" key is pressed.
     private bool DPressed = false; // Variable that will check is "D" key is pressed.
 
-    void Awake()
+    void Start()
     {
         body = GetComponent<Rigidbody2D>(); // Setting the RigidBody2D component.
         //animator = GetComponent<Animator>(); // Setting the Animator component. [OPTIONAL]
@@ -44,7 +44,7 @@ public class Enemy : MonoBehaviour
 
         //ReturnToCenter();
 
-        Debug.Log(goLeft);
+        //    Debug.Log(goLeft);
         //Debug.Log(myCurrentXLocation);
         if (myCurrentXLocation < rightSide && goLeft == true)
         {

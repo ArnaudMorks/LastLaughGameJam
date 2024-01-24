@@ -2,14 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Closset : MonoBehaviour
+public class SC_Closset : MonoBehaviour
 {
-    public GameObject playerSprites;
-    public Collider2D playerCollider;
-    public Transform playerLocation;
-    public Rigidbody2D playerRb;
-    public CharackterController2D controller2D;
-    public SpriteRenderer openDoorsSprite;
+    [SerializeField] private GameObject playerSprites;
+    [SerializeField] private Collider2D playerCollider;
+    [SerializeField] private Transform playerLocation;
+    [SerializeField] private Rigidbody2D playerRb;
+    [SerializeField] private SpriteRenderer openDoorsSprite;
 
     private bool inCloset = false;
     private bool APressed = false;
