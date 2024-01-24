@@ -8,54 +8,73 @@ public class Closset : MonoBehaviour
     public Collider2D playerCollider;
     public Transform playerLocation;
     public CharackterController2D controller2D;
-    public Transform tf;
     public SpriteRenderer openDoorsSprite;
+
+
     private bool inCloset = false;
-    /* Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-    */
+    private bool APressed = false;
+    private bool DPressed = false;
+    private bool EPressed = false;
+    private bool nearClosset = false;
+    private bool inClossetDelay = false;
+
     // Update is called once per frame
     void Update()
     {
-        if (controller2D.nearClosset == true && controller2D.EPressed == true)
+        if (nearClosset == true || inCloset == true)  // Get the keys to go into and get out of the closset.
         {
-            openDoorsSprite.enabled = false;
-            Debug.Log("wein baby");
-            playerSprites.SetActive(false);
-            playerCollider.enabled = false;
-            inCloset = true;
+            if (Input.GetKey(KeyCode.A)) APressed = true; // To get out of the closset.
+            if (Input.GetKey(KeyCode.D)) DPressed = true; 
+            if (Input.GetKey(KeyCode.E)) EPressed = true; // To go into the closset.
         }
-        if (controller2D.DPressed == true || controller2D.APressed == true)
+
+        if (nearClosset == true && EPressed == true)  // If you are near the closset and press E you enter the closset.
         {
-            if (inCloset == true)
+            openDoorsSprite.enabled = false; // Disables the openDoorsSprite.
+            playerSprites.SetActive(false);  // Disables the playerSprite.
+            playerCollider.enabled = false;  // Disables the collider of the player.
+            inCloset = true;                 // 
+            inClossetDelay = false;          // 
+            Invoke("ClossetDelayer", 0.5f);  // Sets the delay for inClossetDelay so you cant spam it.
+        }
+        if (DPressed == true || APressed == true)  
+        {
+            if (inCloset == true && inClossetDelay == true)
             {
                 openDoorsSprite.enabled = true;
                 playerSprites.SetActive(true);
                 playerCollider.enabled = true;
-                playerLocation.position = new Vector3(tf.position.x, (tf.position.y + 0.5f), tf.position.z);
+                playerLocation.position = new Vector3(this.transform.position.x, (this.transform.position.y + 0.2f), this.transform.position.z);
                 inCloset = false;
+                DPressed = false;
+                APressed = false;
+                EPressed = false;
             }
         }
     }
+    void ClossetDelayer()
+    {
+        inClossetDelay = true;
+        DPressed = false;
+        APressed = false;
+        EPressed = false;
+    }
+
     
     private void OnTriggerEnter2D(Collider2D collisionInfo)
     {
         if (collisionInfo.CompareTag("Player"))
         {
-            
-            //Debug.Log(collisionInfo);
-            //setLockerLocation.locationClosset = tf.position.x;
-            controller2D.locationClosset = 3.6f;
-            controller2D.nearClosset = true;
+            nearClosset = true;
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        controller2D.nearClosset = false;
-        Debug.Log(controller2D.locationClosset);
+        if (collision.CompareTag("Player"))
+        {
+            nearClosset = false;
+        }
+
     }
 }
