@@ -10,7 +10,6 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float leftOfMe;
     [SerializeField] private float rightOfMe;
     private Rigidbody2D body;
-
     [SerializeField] private float runSpeed = 0.6f;
     private float myCurrentXLocation;
     private float leftSide;
