@@ -1648,7 +1648,7 @@ MonoBehaviour:
   chrouchingSprite: {fileID: 615622540, guid: 50dec1b99299d4d4297fdd9cfd03147a, type: 3}
   jumpSprite: {fileID: -437363013, guid: 50dec1b99299d4d4297fdd9cfd03147a, type: 3}
   groundCheckPoint: {fileID: 1001322911}
-  groundCheckRadius: 0.2
+  groundCheckRadius: 0.01
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -1928,7 +1928,7 @@ Transform:
   m_GameObject: {fileID: 1001322911}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.128, z: 0}
+  m_LocalPosition: {x: 0, y: -0.171, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
