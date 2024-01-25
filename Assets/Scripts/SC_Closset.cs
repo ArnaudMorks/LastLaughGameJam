@@ -41,7 +41,7 @@ public class SC_Closset : MonoBehaviour
                 Invoke("ClossetDelayerOut", 0.5f);  // Sets the delay for inClossetDelay so you cant spam it.
             }
         }
-        if (movementX == 1 || movementX == -1 || EPressed == true || movementY == 1 || movementY == -1)     // Checks if you pressed up, down or e to get out.
+        if (movementX != 0 || EPressed == true || movementY != 0)     // Checks if you pressed up, down or e to get out.
         {
             if (inCloset == true && inClossetDelay == true)  // Checks if you are in the closset and if you waited for the delay.
             {
