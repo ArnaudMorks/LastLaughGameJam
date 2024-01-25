@@ -26,13 +26,14 @@ public class SC_CharacterController2D : MonoBehaviour
     [SerializeField] private float jumpCoolDownBase = 0.2f;
     [SerializeField] private float jumpCoolDown;
     private bool canJump = true;
-    private bool jumpPressed = false; // Variable that will check is "Space" key is pressed.
+
 /*    [SerializeField] private bool APressed = false; // Variable that will check is "A" key is pressed.
     [SerializeField] private bool DPressed = false; // Variable that will check is "D" key is pressed.
     [SerializeField] private bool EPressed = false; // Variable that will check is "E" key is pressed.*/
     private float movementX;
     private float runSpeedDirection;
 
+    private bool chrouchModeOn = false;
     [SerializeField] private CapsuleCollider2D standingHitbox;
     [SerializeField] private CapsuleCollider2D crouchingHitbox;
 
@@ -64,21 +65,25 @@ public class SC_CharacterController2D : MonoBehaviour
 
         movementX = Input.GetAxisRaw("Horizontal");
 
-        if (Input.GetKeyDown(KeyCode.LeftControl))
+        if (Input.GetKey(KeyCode.LeftControl))
         {
-            crouchingHitbox.enabled = true;
-            standingHitbox.enabled = false;
-            runSpeed = runSpeedBaseChrouched;       //verandert de loopsnelheid
+            if (chrouchModeOn == false && canLand == false)
+            {
+                ChrouchingHitboxEnable();
+                runSpeed = runSpeedBaseChrouched;       //verandert de loopsnelheid
+                spriteRenderer.sprite = chrouchingSprite;
+                chrouchModeOn = true;
+            }
 
-            if (canLand == false) { spriteRenderer.sprite = chrouchingSprite; }     //verandert alleen naar de juiste sprite als je niet aan het vallen bent
+         //   if (canLand == false) { spriteRenderer.sprite = chrouchingSprite; }     //verandert alleen naar de juiste sprite als je niet aan het vallen bent
         }
+
 
         if (Input.GetKeyUp(KeyCode.LeftControl))
         {
-            crouchingHitbox.enabled = false;
-            standingHitbox.enabled = true;
+            StandingHitboxEnable();
             runSpeed = runSpeedBase;                //verandert de loopsnelheid
-
+            chrouchModeOn = false;
             if (canLand == false) { spriteRenderer.sprite = standingSprite; }       //verandert alleen naar de juiste sprite als je niet aan het vallen bent
         }
 
@@ -100,6 +105,7 @@ public class SC_CharacterController2D : MonoBehaviour
             if (Input.GetKey(KeyCode.LeftControl))
             {
                 spriteRenderer.sprite = chrouchingSprite;
+                ChrouchingHitboxEnable();
             }
             else
             {
@@ -149,12 +155,6 @@ public class SC_CharacterController2D : MonoBehaviour
             DPressed = false; // Returning initial value.
         }*/
 
-        // Jumps.
-        if (jumpPressed)
-        {
-            Jump();
-        }
-
 
         /* Setting jump sprite. [OPTIONAL]
         if (!isGrounded)
@@ -173,12 +173,27 @@ public class SC_CharacterController2D : MonoBehaviour
     // For the button on the screen to jump.
     private void Jump()     //zit in de knop om te springen; hoeft maar één keer uitgevoert te worden ("velocity" hoeft maar één keer gebruikt te worden)
     {      // Jumps.
+        if (chrouchModeOn)
+        {
+            StandingHitboxEnable();
+        }
         print("Jumping");
         body.velocity = new Vector2(0, jumpForce); // Jump physics.
         spriteRenderer.sprite = jumpSprite; // Setting the sprite.      Later niet voor bij springen maar als je valt de sprite veranderen (misschien in de animatie tho)
         canLand = true;
     }
-    // Makes sure you dont keep entering the clossets.
 
+
+    private void ChrouchingHitboxEnable()
+    {
+        crouchingHitbox.enabled = true;
+        standingHitbox.enabled = false;
+    }
+
+    private void StandingHitboxEnable()
+    {
+        crouchingHitbox.enabled = false;
+        standingHitbox.enabled = true;
+    }
 
 }
