@@ -1310,7 +1310,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 3
+  orthographic size: 2
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1354,8 +1354,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerTransform: {fileID: 811324425}
-  offsetX: 1.5
-  offsetY: 1.5
+  offsetX: 1
+  offsetY: 0.8
 --- !u!1 &735314157
 GameObject:
   m_ObjectHideFlags: 0
@@ -4391,9 +4391,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2258042531682273738, guid: 2207917d3d0d1f644a977e85c2c33bf6, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2452611384352345901, guid: 2207917d3d0d1f644a977e85c2c33bf6, type: 3}
       propertyPath: m_Name
       value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 4348195406720733127, guid: 2207917d3d0d1f644a977e85c2c33bf6, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5056871148222635021, guid: 2207917d3d0d1f644a977e85c2c33bf6, type: 3}
       propertyPath: m_LocalPosition.x
