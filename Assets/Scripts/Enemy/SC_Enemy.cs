@@ -19,13 +19,16 @@ public class Enemy : MonoBehaviour
     private bool goingRight = false;
     private bool patrol = true;
     private bool playerSpotted = false;
+
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
         // Calculate the left- and right-side of the enemy
         leftSide = this.transform.position.x - leftOfMe;
         rightSide = this.transform.position.x + rightOfMe;
+        playerLocation = FindObjectOfType<SC_CharacterController2D>().transform;
     }
+
     void Update()
     {
         myCurrentXLocation = myXLocation.position.x;
