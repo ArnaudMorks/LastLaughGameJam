@@ -4,150 +4,96 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] private float runSpeed = 0.6f; // Running speed.
-   // [SerializeField] private float jumpForce = 2.6f; // Jump height.      WAARSCHIJNLIJK NIET NODIG
-
-    private Rigidbody2D body; // Variable for the RigidBody2D component.
-    //private Animator animator; // Variable for the Animator component. [OPTIONAL]
     [SerializeField] private GameObject myLocation;
     [SerializeField] private Transform myXLocation;
+    [SerializeField] private Transform playerLocation;
+    [SerializeField] private float leftOfMe;
+    [SerializeField] private float rightOfMe;
+    private Rigidbody2D body;
+
+    [SerializeField] private float runSpeed = 0.6f;
     private float myCurrentXLocation;
-
-
-    [SerializeField] private float centerSide = 0;
-    [SerializeField] private float leftSide = -5f;
-    [SerializeField] private float rightSide = 5f;
+    private float leftSide;
+    private float rightSide;
     private bool goLeft;
-
-    private bool goingLeft = false; // Variable that will check is "A" key is pressed.
-    private bool goingRight = false; // Variable that will check is "D" key is pressed.
-
+    private bool goingLeft = false;
+    private bool goingRight = false;
+    private bool patrol = true;
+    private bool playerSpotted = false;
     void Start()
     {
-        body = GetComponent<Rigidbody2D>(); // Setting the RigidBody2D component.
-        //animator = GetComponent<Animator>(); // Setting the Animator component. [OPTIONAL]
+        body = GetComponent<Rigidbody2D>();
+        // Calculate the left- and right-side of the enemy
+        leftSide = this.transform.position.x - leftOfMe;
+        rightSide = this.transform.position.x + rightOfMe;
     }
-
-   
-
-
-
-
-
-
-
-
-    // Update() is called every frame.
     void Update()
     {
         myCurrentXLocation = myXLocation.position.x;
-
-        //ReturnToCenter();
-
-        //    Debug.Log(goLeft);
-        //Debug.Log(myCurrentXLocation);
-        if (myCurrentXLocation < rightSide && goLeft == true)
+        if (playerSpotted == true)
         {
+            if (myCurrentXLocation >= playerLocation.position.x)
+            {
+                goingLeft = true;
+            }
+            if (myCurrentXLocation <= playerLocation.position.x)
+            {
+                goingRight = true;
+            }
 
-            goingRight = true; // Checking on "A" key pressed.
         }
-        if (myCurrentXLocation > rightSide)
+        if (patrol == true && playerSpotted == false)
         {
-            goLeft = false;
+            if (myCurrentXLocation < rightSide && goLeft == true)
+            {
+                goingRight = true;
+            }
+            if (myCurrentXLocation > rightSide)
+            {
+                goLeft = false;
+            }
+            if (myCurrentXLocation > leftSide && goLeft == false)
+            {
+                goingLeft = true;
+            }
+            if (myCurrentXLocation < leftSide)
+            {
+                goLeft = true;
+            }
         }
-        
-        if (myCurrentXLocation > leftSide && goLeft == false)
-        {
-
-            goingLeft = true; // Checking on "A" key pressed.
-        }
-        
-        if (myCurrentXLocation < leftSide)
-        {
-            goLeft = true;
-        }
-        
-
-        /*
-        if (myCurrentXLocation > rightSide)
-        {
-            Debug.Log("rightside");
-        }
-        if (goLeft == false)
-        {
-            Debug.Log("goleft");
-        }
-        */
-
-
-
-
-
-
-
-
-
-
-        
-        
-
-        
     }
-    void ReturnToCenter()
-    {
-
-
-
-
-
-        if (myCurrentXLocation >= (centerSide-1)|| myCurrentXLocation >= (centerSide + 1))
-        {
-            Debug.Log("im in center");
-        }
-
-        if (myCurrentXLocation >= centerSide)
-        {
-            goingLeft = true; // Checking on "A" key pressed.
-        }
-        if (myCurrentXLocation <= centerSide)
-        {
-            goingRight = true; // Checking on "A" key pressed.
-        }
-
-
-    }
-
-
     void FixedUpdate()
     {
-
-        // Left/Right movement.
+        // Movement of the enemy.
         if (goingLeft)
         {
-            body.velocity = new Vector2(-runSpeed, body.velocity.y); // Move left physics.
-            transform.eulerAngles = new Vector3(transform.eulerAngles.x, 180, transform.eulerAngles.z); // Rotating the character object to the left.
-            goingLeft = false; // Returning initial value.
+            body.velocity = new Vector2(-runSpeed, body.velocity.y);
+            transform.eulerAngles = new Vector3(transform.eulerAngles.x, 180, transform.eulerAngles.z); 
+            goingLeft = false;
         }
         else if (goingRight)
         {
-            body.velocity = new Vector2(runSpeed, body.velocity.y); // Move right physics.
-            transform.eulerAngles = new Vector3(transform.eulerAngles.x, 0, transform.eulerAngles.z); // Rotating the character object to the right.
-            goingRight = false; // Returning initial value.
+            body.velocity = new Vector2(runSpeed, body.velocity.y);
+            transform.eulerAngles = new Vector3(transform.eulerAngles.x, 0, transform.eulerAngles.z);
+            goingRight = false;
         }
         else body.velocity = new Vector2(0, body.velocity.y);
     }
-
-
-
-
-
-    //Invoke("JumpWings", 0.2f);
-
-
-
-
-
-
-
-
+    // Detects if the player enters the trigger.
+    private void OnTriggerEnter2D(Collider2D collisionInfo)
+    {
+        if (collisionInfo.CompareTag("Player"))
+        {
+            playerSpotted = true;
+            runSpeed = 2.6f;
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            playerSpotted = false;
+            runSpeed = 1.6f;
+        }
+    }
 }
