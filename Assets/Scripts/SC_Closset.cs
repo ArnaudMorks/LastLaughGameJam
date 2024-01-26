@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SC_Closset : MonoBehaviour
 {
-    [SerializeField] private GameObject playerSprites;
+    [SerializeField] private GameObject playerGameObject;
     [SerializeField] private Collider2D playerCollider;
     [SerializeField] private Transform playerLocation;
     [SerializeField] private Rigidbody2D playerRb;
@@ -22,6 +22,10 @@ public class SC_Closset : MonoBehaviour
 
     private void Start()
     {
+        playerLocation = FindObjectOfType<SC_CharacterController2D>().transform;
+        playerCollider = FindObjectOfType<SC_CharacterController2D>().GetComponent<CapsuleCollider2D>();
+        playerRb = FindObjectOfType<SC_CharacterController2D>().GetComponent<Rigidbody2D>();
+        playerGameObject = FindObjectOfType<SC_CharacterController2D>().gameObject;
         spriteRenderer.sprite = openDoorsSprite;
     }
 
@@ -42,7 +46,7 @@ public class SC_Closset : MonoBehaviour
                 playerRb.simulated = false;      // Disables the gravity so it doesnt spike at 1000km/h and go through the floor.
                                                  //  openDoorsSprite.enabled = false; // Disables the openDoorsSprite.
                 spriteRenderer.sprite = closedDoorSprite;
-                playerSprites.SetActive(false);  // Disables the playerSprite.
+                playerGameObject.SetActive(false);  // Disables the playerSprite.
                 playerCollider.enabled = false;  // Disables the collider of the player.
                 inCloset = true;                 // 
                 inClossetDelay = false;          // 
@@ -57,7 +61,7 @@ public class SC_Closset : MonoBehaviour
                 playerRb.simulated = true;      // Enables the gravity again.
                                                 // openDoorsSprite.enabled = true; // Enables the openDoorsSprite.
                 spriteRenderer.sprite = openDoorsSprite;
-                playerSprites.SetActive(true);  // Enables the playerSprite.
+                playerGameObject.SetActive(true);  // Enables the playerSprite.
                 playerCollider.enabled = true;  // Enables the collider of the player.
                 playerLocation.position = new Vector3(this.transform.position.x, (this.transform.position.y), this.transform.position.z); // Sets the position of the player to the closset upon exiting.
                 inCloset = false;

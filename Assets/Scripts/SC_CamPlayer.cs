@@ -9,6 +9,10 @@ public class SC_CamPlayer : MonoBehaviour
     [SerializeField] float offsetY;
     //  [SerializeField] Vector3 offsets;
 
+    private void Start()
+    {
+        playerTransform = FindObjectOfType<SC_CharacterController2D>().transform;
+    }
 
     void Update()
     {
