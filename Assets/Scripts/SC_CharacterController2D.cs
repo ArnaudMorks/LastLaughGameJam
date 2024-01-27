@@ -53,6 +53,11 @@ public class SC_CharacterController2D : MonoBehaviour
     // Update() is called every frame.
     void Update()
     {
+        if (Time.timeScale == 0)        //dat je niet op konppen kan klikken als het spel op pauze staat
+        {
+            return;
+        }
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
             if (isGrounded && canJump) 

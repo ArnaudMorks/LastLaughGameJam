@@ -36,6 +36,10 @@ public class SC_Closet : MonoBehaviour
 
     void Update()
     {
+        if (Time.timeScale == 0)        //dat je niet op konppen kan klikken als het spel op pauze staat
+        {
+            return;
+        }
 
         if (nearCloset == true || inCloset == true)  // Get the keys to go into and get out of the closset.
         {

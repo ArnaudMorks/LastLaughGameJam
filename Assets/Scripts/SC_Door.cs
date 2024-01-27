@@ -40,7 +40,12 @@ public class SC_Door : MonoBehaviour
 
     void Update()
     {
-            if (Input.GetKeyDown(KeyCode.E) && playerInRange == true)
+        if (Time.timeScale == 0)        //dat je niet op konppen kan klikken als het spel op pauze staat
+        {
+            return;
+        }
+
+        if (Input.GetKeyDown(KeyCode.E) && playerInRange == true)
             {
                 if (isOpen == true) { DoorClose(); }
                 else { DoorOpen(); }
