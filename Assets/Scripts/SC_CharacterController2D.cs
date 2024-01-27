@@ -36,6 +36,8 @@ public class SC_CharacterController2D : MonoBehaviour
     private bool chrouchModeOn = false;
     [SerializeField] private CapsuleCollider2D standingHitbox;
     [SerializeField] private CapsuleCollider2D crouchingHitbox;
+    private bool canStand = true;
+    [SerializeField] private BoxCollider2D triggerHitbox;
 
 
     void Start()
@@ -81,10 +83,17 @@ public class SC_CharacterController2D : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.LeftControl))
         {
-            StandingHitboxEnable();
-            runSpeed = runSpeedBase;                //verandert de loopsnelheid
-            chrouchModeOn = false;
-            if (canLand == false) { spriteRenderer.sprite = standingSprite; }       //verandert alleen naar de juiste sprite als je niet aan het vallen bent
+            if (canStand == true)
+            {
+                StandingUp();
+            }
+
+        }
+
+        if ((Input.GetKey(KeyCode.LeftControl) == false) && canStand && chrouchModeOn && isGrounded)      //als je wilt opstaan en het mag weer
+        {
+            StandingUp();
+            print("Sta weer");
         }
 
 
@@ -168,7 +177,15 @@ public class SC_CharacterController2D : MonoBehaviour
 
 
 
+    private void OnTriggerStay2D(Collider2D collision)      //elke frame controleert die of er iets in het trigger veld zit
+    {
+        canStand = false;
+    }
 
+    private void OnTriggerExit2D(Collider2D collision)      //één keer
+    {
+        canStand = true;
+    }
 
     // For the button on the screen to jump.
     private void Jump()     //zit in de knop om te springen; hoeft maar één keer uitgevoert te worden ("velocity" hoeft maar één keer gebruikt te worden)
@@ -184,16 +201,26 @@ public class SC_CharacterController2D : MonoBehaviour
     }
 
 
+    private void StandingUp()
+    {
+        StandingHitboxEnable();
+        runSpeed = runSpeedBase;                //verandert de loopsnelheid
+        chrouchModeOn = false;
+        if (canLand == false) { spriteRenderer.sprite = standingSprite; }       //verandert alleen naar de juiste sprite als je niet aan het vallen bent
+    }
+
     private void ChrouchingHitboxEnable()
     {
         crouchingHitbox.enabled = true;
         standingHitbox.enabled = false;
+        triggerHitbox.enabled = true;       //trigger hitbox om te checken of je kan staan
     }
 
     private void StandingHitboxEnable()
     {
         crouchingHitbox.enabled = false;
         standingHitbox.enabled = true;
+        triggerHitbox.enabled = false;
     }
 
 }
