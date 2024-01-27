@@ -20,6 +20,11 @@ public class SC_Closset : MonoBehaviour
     private float movementX;
     private float movementY;
 
+    [SerializeField] private AudioClip audioOpen;
+    [SerializeField] private AudioClip audioClose;
+    [SerializeField] private AudioSource audioSource;
+
+
     private void Start()
     {
         playerLocation = FindObjectOfType<SC_CharacterController2D>().transform;
@@ -51,6 +56,12 @@ public class SC_Closset : MonoBehaviour
                 inCloset = true;                 // 
                 inClossetDelay = false;          // 
                 playerLocation.position = new Vector3(this.transform.position.x, (this.transform.position.y) - 0.3f, this.transform.position.z); // Sets the position of the player to the closset opon entering.
+
+                audioSource.clip = audioClose;
+                audioSource.volume = Random.Range(0.8f, 1);
+                audioSource.pitch = Random.Range(0.8f, 1.2f);
+                audioSource.PlayOneShot(audioSource.clip);
+
                 Invoke("ClossetDelayerOut", 0.5f);  // Sets the delay for inClossetDelay so you cant spam it.
             }
         }
@@ -67,6 +78,12 @@ public class SC_Closset : MonoBehaviour
                 inCloset = false;
                 EPressed = false;
                 clossetSpammer = true;
+
+                audioSource.clip = audioOpen;
+                audioSource.volume = Random.Range(0.8f, 1);
+                audioSource.pitch = Random.Range(0.8f, 1.2f);
+                audioSource.PlayOneShot(audioSource.clip);
+
                 Invoke("ClossetDelayerIn", 0.5f);  // Sets the delay for clossetSpammer so you cant spam it.
             }
         }
