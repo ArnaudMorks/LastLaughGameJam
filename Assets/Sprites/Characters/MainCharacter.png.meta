@@ -110,15 +110,15 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: MainCharacter_0
+      name: MC_run1
       rect:
         serializedVersion: 2
-        x: 538
-        y: 1485
-        width: 392
-        height: 581
+        x: 542
+        y: 1496
+        width: 400
+        height: 642
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -131,15 +131,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MainCharacter_1
+      name: MC_walk1
       rect:
         serializedVersion: 2
-        x: 1299
-        y: 1494
-        width: 244
-        height: 604
+        x: 1252
+        y: 1498
+        width: 400
+        height: 642
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -152,15 +152,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MainCharacter_2
+      name: MC_sneak1
       rect:
         serializedVersion: 2
-        x: 1652
-        y: 1468
-        width: 401
-        height: 495
+        x: 1653
+        y: 1469
+        width: 400
+        height: 642
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -173,15 +173,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MainCharacter_3
+      name: MC_jump
       rect:
         serializedVersion: 2
-        x: 135
-        y: 714
-        width: 317
-        height: 602
+        x: 2399
+        y: 1488
+        width: 400
+        height: 642
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -194,15 +194,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MainCharacter_4
+      name: MC_press
       rect:
         serializedVersion: 2
-        x: 521
-        y: 741
-        width: 388
-        height: 570
+        x: 118
+        y: 724
+        width: 400
+        height: 642
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -215,15 +215,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MainCharacter_5
+      name: MC_run2
       rect:
         serializedVersion: 2
-        x: 1219
-        y: 724
-        width: 215
-        height: 602
+        x: 519
+        y: 751
+        width: 400
+        height: 642
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -236,15 +236,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MainCharacter_6
+      name: MC_walk2
       rect:
         serializedVersion: 2
-        x: 1599
-        y: 673
+        x: 1173
+        y: 724
         width: 400
-        height: 495
+        height: 642
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -257,15 +257,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MainCharacter_7
+      name: MC_sneak2
       rect:
         serializedVersion: 2
-        x: 1234
-        y: 101
-        width: 199
-        height: 602
+        x: 1599
+        y: 733
+        width: 400
+        height: 642
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -278,15 +278,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MainCharacter_8
+      name: MC_stand
       rect:
         serializedVersion: 2
-        x: 1723
-        y: 174
-        width: 370
-        height: 494
+        x: 1176
+        y: 66
+        width: 400
+        height: 642
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -294,6 +294,27 @@ TextureImporter:
       bones: []
       spriteID: d66c4833130f5ac4892a0868cbb8055e
       internalID: 1572803068
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MC_Chrouch
+      rect:
+        serializedVersion: 2
+        x: 1727
+        y: 46
+        width: 400
+        height: 642
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9cbeb05a15b8e2c47a480d654ac9d3a3
+      internalID: -1266239053
       vertices: []
       indices: 
       edges: []
@@ -309,15 +330,16 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      MainCharacter_0: -407022041
-      MainCharacter_1: 675645405
-      MainCharacter_2: 1984571988
-      MainCharacter_3: 1752438182
-      MainCharacter_4: 1213536098
-      MainCharacter_5: 121963929
-      MainCharacter_6: 105480750
-      MainCharacter_7: -1341095844
-      MainCharacter_8: 1572803068
+      MC_Chrouch: -1266239053
+      MC_jump: 1752438182
+      MC_press: 1213536098
+      MC_run1: -407022041
+      MC_run2: 121963929
+      MC_sneak1: 1984571988
+      MC_sneak2: -1341095844
+      MC_stand: 1572803068
+      MC_walk1: 675645405
+      MC_walk2: 105480750
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
