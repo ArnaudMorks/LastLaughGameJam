@@ -1,5 +1,16 @@
 using UnityEngine;
 
+public enum PlayerState
+{
+    idle = 0,
+    walking,
+    running,
+    jumping,
+    idleCrouch,
+    crouchWalking,
+    dead
+}
+
 public class SC_CharacterController2D : MonoBehaviour
 {
     [SerializeField] private float runSpeedBase;    //standaard loopsnelheid (als je gewoon staat)
@@ -14,8 +25,9 @@ public class SC_CharacterController2D : MonoBehaviour
 
     private Rigidbody2D body; // Variable for the RigidBody2D component.
     //private SpriteRenderer sr; // Variable for the SpriteRenderer component.
-    private Animator animator; // Variable for the Animator component. [OPTIONAL]
     //public Transform transform;
+    private PlayerState playerState;
+    private Animator animator; // Variable for the Animator component. [OPTIONAL]
 
     private bool canLand = false;     //voor als die geland is
     private bool isGrounded; // Variable that will check if character is on the ground.
@@ -78,7 +90,7 @@ public class SC_CharacterController2D : MonoBehaviour
             {
                 ChrouchingHitboxEnable();
                 runSpeed = runSpeedBaseChrouched;       //verandert de loopsnelheid
-                spriteRenderer.sprite = chrouchingSprite;
+             //   spriteRenderer.sprite = chrouchingSprite;
                 chrouchModeOn = true;
             }
 
@@ -118,12 +130,12 @@ public class SC_CharacterController2D : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.LeftControl))
             {
-                spriteRenderer.sprite = chrouchingSprite;
+              //  spriteRenderer.sprite = chrouchingSprite;
                 ChrouchingHitboxEnable();
             }
             else
             {
-                spriteRenderer.sprite = standingSprite;
+              //  spriteRenderer.sprite = standingSprite;
             }
 
             canLand = false;
@@ -143,31 +155,38 @@ public class SC_CharacterController2D : MonoBehaviour
         {
             runSpeedDirection = movementX * runSpeed;
             body.velocity = new Vector2(runSpeedDirection, body.velocity.y);
+            if (canLand == false && chrouchModeOn == false) playerState = PlayerState.walking;       //player state voor animatie
+            else if (canLand == false && chrouchModeOn) playerState = PlayerState.crouchWalking;
+          //  print(playerState);
         }
-        else body.velocity = new Vector2(0, body.velocity.y);
-
+        else
+        {
+            body.velocity = new Vector2(0, body.velocity.y);
+            if (canLand == false && chrouchModeOn == false) playerState = PlayerState.idle;
+            else if (canLand == false && chrouchModeOn) playerState = PlayerState.idleCrouch;
+        }
 
         if (movementX == 1)     //tijdelijk om te draaien; gaat later via animation waarschijnlijk
         {
-            transform.eulerAngles = new Vector3(transform.eulerAngles.x, 0, transform.eulerAngles.z); // Rotating the character object to the right.
+            transform.eulerAngles = new Vector3(transform.eulerAngles.x, 180, transform.eulerAngles.z); // Rotating the character object to the right.
         }
         else if (movementX == -1)
         {
-            transform.eulerAngles = new Vector3(transform.eulerAngles.x, 180, transform.eulerAngles.z); // Rotating the character object to the left.
+            transform.eulerAngles = new Vector3(transform.eulerAngles.x, 0, transform.eulerAngles.z); // Rotating the character object to the left.
         }
-/*        // Left/Right movement.
-        if (APressed)
-        {
-            body.velocity = new Vector2(-runSpeed, body.velocity.y); // Move left physics.
-            transform.eulerAngles = new Vector3(transform.eulerAngles.x, 180, transform.eulerAngles.z); // Rotating the character object to the left.
-            APressed = false; // Returning initial value.
-        }
-        else if (DPressed)
-        {
-            body.velocity = new Vector2(runSpeed, body.velocity.y); // Move right physics.
-            transform.eulerAngles = new Vector3(transform.eulerAngles.x, 0, transform.eulerAngles.z); // Rotating the character object to the right.
-            DPressed = false; // Returning initial value.
-        }*/
+        /*        // Left/Right movement.
+                if (APressed)
+                {
+                    body.velocity = new Vector2(-runSpeed, body.velocity.y); // Move left physics.
+                    transform.eulerAngles = new Vector3(transform.eulerAngles.x, 180, transform.eulerAngles.z); // Rotating the character object to the left.
+                    APressed = false; // Returning initial value.
+                }
+                else if (DPressed)
+                {
+                    body.velocity = new Vector2(runSpeed, body.velocity.y); // Move right physics.
+                    transform.eulerAngles = new Vector3(transform.eulerAngles.x, 0, transform.eulerAngles.z); // Rotating the character object to the right.
+                    DPressed = false; // Returning initial value.
+                }*/
 
 
         /* Setting jump sprite. [OPTIONAL]
@@ -178,6 +197,7 @@ public class SC_CharacterController2D : MonoBehaviour
         }
         else animator.enabled = true; // Turning on animation.
         */
+        animator.SetInteger("PlayerState", (int)playerState);
     }
 
 
@@ -204,7 +224,8 @@ public class SC_CharacterController2D : MonoBehaviour
         }
         print("Jumping");
         body.velocity = new Vector2(0, jumpForce); // Jump physics.
-        spriteRenderer.sprite = jumpSprite; // Setting the sprite.      Later niet voor bij springen maar als je valt de sprite veranderen (misschien in de animatie tho)
+                                                   // spriteRenderer.sprite = jumpSprite; // Setting the sprite.      Later niet voor bij springen maar als je valt de sprite veranderen (misschien in de animatie tho)
+        playerState = PlayerState.jumping;
         canLand = true;
     }
 
@@ -214,7 +235,11 @@ public class SC_CharacterController2D : MonoBehaviour
         StandingHitboxEnable();
         runSpeed = runSpeedBase;                //verandert de loopsnelheid
         chrouchModeOn = false;
-        if (canLand == false) { spriteRenderer.sprite = standingSprite; }       //verandert alleen naar de juiste sprite als je niet aan het vallen bent
+        if (canLand == false)
+        {
+            playerState = PlayerState.idle;
+          //  spriteRenderer.sprite = standingSprite;       //verandert alleen naar de juiste sprite als je niet aan het vallen bent
+        }
     }
 
     private void ChrouchingHitboxEnable()

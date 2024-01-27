@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 1850
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -299,7 +299,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MC_Chrouch
+      name: MC_Crouch
       rect:
         serializedVersion: 2
         x: 1727
@@ -330,7 +330,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      MC_Chrouch: -1266239053
+      MC_Crouch: -1266239053
       MC_jump: 1752438182
       MC_press: 1213536098
       MC_run1: -407022041

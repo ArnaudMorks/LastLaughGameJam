@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 1870898070135265733}
   - component: {fileID: 4261762281188666044}
   m_Layer: 0
-  m_Name: Player
+  m_Name: PlayerBackup
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33,7 +33,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -8.41, y: -3.89, z: 0}
-  m_LocalScale: {x: 3.2, y: 3.2, z: 1}
+  m_LocalScale: {x: 2.2, y: 2.2, z: 2.2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1641951913887186941}
@@ -49,7 +49,7 @@ Animator:
   m_GameObject: {fileID: 5441118132845279918}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 82c1838f95e42fa4690d539e94afa0f0, type: 2}
+  m_Controller: {fileID: 9100000, guid: be7482ab4b8087049932da78c9cbfbde, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -158,7 +158,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 1572803068, guid: a1def68a1f0f3da4f8ed568a9acfbe68, type: 3}
+  m_Sprite: {fileID: 1043591525, guid: 50dec1b99299d4d4297fdd9cfd03147a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -201,8 +201,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.018690933, y: -0.008}
-  m_Size: {x: 0.060560483, y: 0.33}
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 0.18, y: 0.33}
   m_Direction: 0
 --- !u!70 &1870898070135265733
 CapsuleCollider2D:
@@ -236,8 +236,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.01869093, y: -0.0699}
-  m_Size: {x: 0.06056048, y: 0.20274945}
+  m_Offset: {x: 0, y: -0.06362521}
+  m_Size: {x: 0.18, y: 0.20274945}
   m_Direction: 0
 --- !u!61 &4261762281188666044
 BoxCollider2D:
@@ -271,18 +271,18 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.02, y: 0.104744904}
+  m_Offset: {x: -0.00086534396, y: 0.104744904}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.21621622, y: 0.34702703}
+    oldSize: {x: 0.18, y: 0.33}
     newSize: {x: 0.18, y: 0.33}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.05056048, y: 0.120510235}
+  m_Size: {x: 0.12633717, y: 0.120510235}
   m_EdgeRadius: 0
 --- !u!1 &6278384257262901131
 GameObject:
