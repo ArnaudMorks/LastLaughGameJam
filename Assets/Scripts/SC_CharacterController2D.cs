@@ -179,7 +179,10 @@ public class SC_CharacterController2D : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)      //elke frame controleert die of er iets in het trigger veld zit
     {
-        canStand = false;
+        if (collision.isTrigger == false)
+        {
+            canStand = false;
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)      //één keer
