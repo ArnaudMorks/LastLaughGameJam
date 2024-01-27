@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5070095657997509317}
   - component: {fileID: 1264532286737023223}
   m_Layer: 0
-  m_Name: Closset
+  m_Name: Closet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

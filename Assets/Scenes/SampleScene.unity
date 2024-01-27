@@ -5170,7 +5170,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4068658463050251917, guid: a22ae8e4be9695c40917b079b637a982, type: 3}
       propertyPath: m_Name
-      value: Closset
+      value: Closet
       objectReference: {fileID: 0}
     - target: {fileID: 6356262047712378879, guid: a22ae8e4be9695c40917b079b637a982, type: 3}
       propertyPath: playerRb
