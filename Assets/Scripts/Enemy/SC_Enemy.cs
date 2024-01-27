@@ -19,6 +19,13 @@ public class Enemy : MonoBehaviour
     private bool goingRight = false;
     private bool patrol = true;
     private bool playerSpotted = false;
+    [SerializeField] private bool affectedByJukeBox = false;
+    [SerializeField] private GameObject nearJukeBox;
+    [SerializeField] private AudioSource nearJukeBoxAudio;
+    [SerializeField] private SC_Jukebox sc_juke;
+    private bool dancingQueen;
+    public bool jukeboxPlaying = false;
+
 
     void Start()
     {
@@ -42,8 +49,13 @@ public class Enemy : MonoBehaviour
             {
                 goingRight = true;
             }
-
         }
+
+        if (affectedByJukeBox)
+        {
+            JukeboxStuff();
+        }
+
         if (patrol == true && playerSpotted == false)
         {
             if (myCurrentXLocation < rightSide && goLeft == true)
@@ -64,6 +76,45 @@ public class Enemy : MonoBehaviour
             }
         }
     }
+    void JukeboxStuff()
+    {
+        jukeboxPlaying = sc_juke.JukeBoxOn;
+        dancingQueen = true;
+        if (jukeboxPlaying && dancingQueen)
+        {
+            runSpeed = 2f;
+            if (myCurrentXLocation <= (nearJukeBox.transform.position.x + 0.2f) && myCurrentXLocation >= (nearJukeBox.transform.position.x - 0.2f))
+            {
+                goingLeft = false;
+                goingRight = false;
+                dancingQueen = false;
+                patrol = false;
+                Invoke("TurnItOff", 5f);
+                Invoke("ResetJukeBox", 5.1f);
+            }
+            else if (myCurrentXLocation > nearJukeBox.transform.position.x - 0.3f)
+            {
+                goingLeft = true;
+            }
+            else if (myCurrentXLocation < nearJukeBox.transform.position.x + 0.3f)
+            {
+                goingRight = true;
+            }
+        }
+    }
+    void TurnItOff()
+    {
+        nearJukeBoxAudio.enabled = false;
+        sc_juke.JukeBoxOn = false;
+        patrol = true;
+        runSpeed = 0.4f;
+        jukeboxPlaying = false;
+    }
+    void ResetJukeBox()
+    {
+        nearJukeBoxAudio.enabled = true;
+    }
+
     void FixedUpdate()
     {
         // Movement of the enemy.

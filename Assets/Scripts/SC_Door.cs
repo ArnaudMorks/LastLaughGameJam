@@ -11,6 +11,7 @@ public class SC_Door : MonoBehaviour
     [SerializeField] private Sprite openDoorsSprite;
     [SerializeField] private Sprite closedDoorSprite;
     [SerializeField] private SpriteRenderer spriteRenderer;
+    [SerializeField] private GameObject shadowObject;
 
     [SerializeField] private bool isOpen = false;       //hiermee kan je ook bepalen of die open of dicht moet beginnen
     private bool playerInRange = false;
@@ -21,6 +22,7 @@ public class SC_Door : MonoBehaviour
 
     void Start()
     {
+        shadowObject.SetActive(true);
         playerCollider = FindObjectOfType<SC_CharacterController2D>().GetComponent<CapsuleCollider2D>();
 
         if (isOpen == true)
@@ -78,6 +80,7 @@ public class SC_Door : MonoBehaviour
         audioSource.volume = Random.Range(0.8f, 1);
         audioSource.pitch = Random.Range(0.8f, 1.2f);
         audioSource.PlayOneShot(audioSource.clip);
+        shadowObject.SetActive(false);
         isOpen = true;
     }
 
@@ -89,6 +92,7 @@ public class SC_Door : MonoBehaviour
         audioSource.volume = Random.Range(0.8f, 1);
         audioSource.pitch = Random.Range(0.8f, 1.2f);
         audioSource.PlayOneShot(audioSource.clip);
+        shadowObject.SetActive(true);
         isOpen = false;
     }
 
