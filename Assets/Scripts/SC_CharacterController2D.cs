@@ -72,7 +72,7 @@ public class SC_CharacterController2D : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (isGrounded && canJump) 
+            if (isGrounded && canJump && canStand) 
             {
                 canJump = false;
                 Jump(); 
