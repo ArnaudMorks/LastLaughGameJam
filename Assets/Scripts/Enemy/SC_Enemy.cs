@@ -58,6 +58,16 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
+        if (body.velocity.x == 0)
+        {
+            enemyState = EnemyState.idle;
+        }
+        else if (body.velocity.x != 0)
+        {
+            enemyState = EnemyState.walking;
+        }
+
+
         myCurrentXLocation = myXLocation.position.x;
         if (playerSpotted == true)
         {
@@ -108,7 +118,6 @@ public class Enemy : MonoBehaviour
         randomChecker = Random.Range(0, randomChance);
         if (randomChecker == 0)
         {
-            enemyState = EnemyState.idle;
             patrol = false;
             allowRandom = true;
         }
@@ -135,7 +144,7 @@ public class Enemy : MonoBehaviour
                 goingRight = false;
                 dancingQueen = false;
                 patrol = false;
-                enemyState = EnemyState.idle;
+
                 Invoke("TurnItOff", 5f);
                 Invoke("ResetJukeBox", 5.1f);
             }
@@ -143,7 +152,7 @@ public class Enemy : MonoBehaviour
             {
                 goingLeft = true;
             }
-            else if (myCurrentXLocation < nearJukeBox.transform.position.x + 0.3f && jukeboxdelay)
+            else if (myCurrentXLocation < nearJukeBox.transform.position.x + 0.3 && jukeboxdelay)
             {
                 goingRight = true;
             }
@@ -175,14 +184,12 @@ public class Enemy : MonoBehaviour
             body.velocity = new Vector2(-runSpeed, body.velocity.y);
             transform.eulerAngles = new Vector3(transform.eulerAngles.x, 180, transform.eulerAngles.z); 
             goingLeft = false;
-            enemyState = EnemyState.walking;
         }
         else if (goingRight)
         {
             body.velocity = new Vector2(runSpeed, body.velocity.y);
             transform.eulerAngles = new Vector3(transform.eulerAngles.x, 0, transform.eulerAngles.z);
             goingRight = false;
-            enemyState = EnemyState.walking;
         }
         else body.velocity = new Vector2(0, body.velocity.y);
 
