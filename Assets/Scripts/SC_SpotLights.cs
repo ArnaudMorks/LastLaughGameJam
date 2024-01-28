@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SC_SpotLights : MonoBehaviour
 {
+    private SC_GamePause gamePause;
     private GameObject spotLight;
     public SC_HidingChecker hidin;
     public float rotationSpeed = 10f;
@@ -13,6 +14,7 @@ public class SC_SpotLights : MonoBehaviour
     public bool iWaited2 = true;
     void Start()
     {
+        gamePause = FindObjectOfType<SC_GamePause>();
         pauseABit = true;
         iWaited2 = true;
         iWaited = true;
@@ -33,6 +35,7 @@ public class SC_SpotLights : MonoBehaviour
             if (hidin.imHidden == false) // Let it seperate or its gonna call every frame even when player is now visible
             {
                 Debug.Log("see u");
+                gamePause.playerDead = true;
             }
         }
 

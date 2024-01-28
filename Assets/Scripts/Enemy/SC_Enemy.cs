@@ -12,6 +12,7 @@ public class Enemy : MonoBehaviour
 {
     private DynamicPlayer dynamicPlayer;
 
+    [SerializeField] private AudioSource audioSource;
     private EnemyState enemyState;
     private Animator animator;
     [SerializeField] private GameObject myGunLight;
@@ -47,9 +48,11 @@ public class Enemy : MonoBehaviour
     [SerializeField] private int randomChance = 1; 
     private bool allowRandom = true;
     private float randomChecker;
+    private SC_GamePause gamePause;
 
     void Start()
     {
+        gamePause = FindObjectOfType<SC_GamePause>();
         body = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         // Calculate the left- and right-side of the enemy
@@ -207,10 +210,15 @@ public class Enemy : MonoBehaviour
     {
         if (collisionInfo.CompareTag("Player"))
         {
+            audioSource.volume = Random.Range(0.8f, 1);
+            audioSource.pitch = Random.Range(0.8f, 1.2f);
+            audioSource.PlayOneShot(audioSource.clip);
+
             playerSpotted = true;
             myGunLight.SetActive(true);
             runSpeed = 2.6f;
             enemyState = EnemyState.shooting;
+            gamePause.playerDead = true;
         }
     }
     private void OnTriggerExit2D(Collider2D collision)

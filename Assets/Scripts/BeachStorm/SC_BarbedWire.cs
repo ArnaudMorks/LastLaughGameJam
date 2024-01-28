@@ -6,9 +6,11 @@ public class SC_BarbedWire : MonoBehaviour
 {
     [SerializeField] float despawnTimer = 7;
     private int mirrored;
+    private SC_GamePause gamePause;
 
     private void Start()
     {
+        gamePause = FindObjectOfType<SC_GamePause>();
         Destroy(gameObject, despawnTimer);
 
         mirrored = Random.Range(0, 2);
@@ -37,6 +39,6 @@ public class SC_BarbedWire : MonoBehaviour
 
     private void OnHit()
     {
-        Time.timeScale = 0;
+        gamePause.playerDead = true;
     }
 }

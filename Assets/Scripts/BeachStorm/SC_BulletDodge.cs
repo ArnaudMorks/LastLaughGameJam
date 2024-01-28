@@ -17,11 +17,13 @@ public class SC_BulletDodge : MonoBehaviour
     [SerializeField] private float downY;
     [SerializeField] private SC_WarningUp warningUp;
     [SerializeField] private SC_WarningDown warningDown;
-/*    [SerializeField] private SpriteRenderer warningUpSprite;
-    [SerializeField] private SpriteRenderer warningDownSprite;*/
+    /*    [SerializeField] private SpriteRenderer warningUpSprite;
+        [SerializeField] private SpriteRenderer warningDownSprite;*/
+    private SC_GamePause gamePause;
 
     private void Start()
     {
+        gamePause = FindObjectOfType<SC_GamePause>();
         warningUp = FindObjectOfType<SC_WarningUp>();
         warningDown = FindObjectOfType<SC_WarningDown>();
 
@@ -85,7 +87,7 @@ public class SC_BulletDodge : MonoBehaviour
 
     private void OnHit()
     {
-        Time.timeScale = 0;
+        gamePause.playerDead = true;
     }
 
 }

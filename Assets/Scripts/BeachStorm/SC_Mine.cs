@@ -6,9 +6,11 @@ public class SC_Mine : MonoBehaviour
 {
     [SerializeField] AudioSource audioSource;
     [SerializeField] float despawnTimer = 7;
+    private SC_GamePause gamePause;
 
     private void Start()
     {
+        gamePause = FindObjectOfType<SC_GamePause>();
         Destroy(gameObject, despawnTimer);
     }
 
@@ -30,7 +32,7 @@ public class SC_Mine : MonoBehaviour
 
     private void OnExplode()
     {
-        Time.timeScale = 0;
+        gamePause.playerDead = true;
         audioSource.volume = Random.Range(0.8f, 1);
         audioSource.pitch = Random.Range(0.8f, 1.2f);
         audioSource.PlayOneShot(audioSource.clip);
