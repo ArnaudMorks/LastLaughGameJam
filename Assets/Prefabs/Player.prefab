@@ -99,6 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e75c0b226c9c7b408c9e347079ae757, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  beachLevel: 0
   runSpeedBase: 2
   runSpeedBaseChrouched: 1.6
   runSpeed: 0
@@ -202,7 +203,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.018690933, y: -0.008}
-  m_Size: {x: 0.060560483, y: 0.33}
+  m_Size: {x: 0.060560483, y: 0.32}
   m_Direction: 0
 --- !u!70 &1870898070135265733
 CapsuleCollider2D:

@@ -383,13 +383,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: GermanSoldier_13
+      name: GermanSoldier_DeadGun
       rect:
         serializedVersion: 2
-        x: 3130
-        y: 936
-        width: 343
-        height: 242
+        x: 2414
+        y: 32
+        width: 393
+        height: 155
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -446,12 +446,12 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: GermanSoldier_16
+      name: GermanSoldier_DeadMan
       rect:
         serializedVersion: 2
         x: 1803
         y: 32
-        width: 1002
+        width: 610
         height: 155
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -483,14 +483,14 @@ TextureImporter:
       GermanSoldier_10: 685656575
       GermanSoldier_11: -1419155612
       GermanSoldier_12: -1245767278
-      GermanSoldier_13: -383155207
-      GermanSoldier_16: 521185356
       GermanSoldier_2: 1920348209
       GermanSoldier_3: -658299746
       GermanSoldier_4: -359310247
       GermanSoldier_5: 1545789966
       GermanSoldier_6: -1203411448
       GermanSoldier_9: 2116212724
+      GermanSoldier_DeadGun: -383155207
+      GermanSoldier_DeadMan: 521185356
       March_standing: -1402690579
       March_walk01: 1374144070
       March_walk02: -1402368250

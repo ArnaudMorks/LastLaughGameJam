@@ -11,8 +11,16 @@ public enum PlayerState
     dead
 }
 
+public enum GameMode
+{
+    normal = 0,
+    beachStorm
+}
+
 public class SC_CharacterController2D : MonoBehaviour
 {
+    [SerializeField] private bool beachLevel = false;       //alleen aan in beach level
+
     [SerializeField] private float runSpeedBase;    //standaard loopsnelheid (als je gewoon staat)
     [SerializeField] private float runSpeedBaseChrouched;
     [SerializeField] private float runSpeed; // Running speed.
@@ -24,8 +32,8 @@ public class SC_CharacterController2D : MonoBehaviour
     [SerializeField] private Sprite jumpSprite; // Sprite that shows up when the character is not on the ground. [OPTIONAL]
 
     private Rigidbody2D body; // Variable for the RigidBody2D component.
-    //private SpriteRenderer sr; // Variable for the SpriteRenderer component.
-    //public Transform transform;
+
+    private GameMode gameMode = 0;
     private PlayerState playerState;
     private Animator animator; // Variable for the Animator component
 
@@ -60,6 +68,15 @@ public class SC_CharacterController2D : MonoBehaviour
 
         jumpCoolDown = jumpCoolDownBase;    //een "Base" van iets is de standaard waarde; zodat deze later weer opgehaald kan worden
         runSpeed = runSpeedBase;
+
+        if (beachLevel)
+        {
+            movementX = 1;
+            gameMode = GameMode.beachStorm;
+        }
+        else { gameMode = GameMode.normal; }
+
+        animator.SetInteger("GameMode", (int)gameMode);
     }
 
     // Update() is called every frame.
@@ -82,7 +99,10 @@ public class SC_CharacterController2D : MonoBehaviour
                 if (Input.GetKey(KeyCode.D)) DPressed = true; // Checking on "D" key pressed.
                 if (Input.GetKey(KeyCode.E)) EPressed = true; // Checking on "D" key pressed.*/
 
-        movementX = Input.GetAxisRaw("Horizontal");
+        if (beachLevel == false)
+        {
+            movementX = Input.GetAxisRaw("Horizontal");
+        }
 
         if (Input.GetKey(KeyCode.LeftControl))
         {
@@ -117,7 +137,7 @@ public class SC_CharacterController2D : MonoBehaviour
         if (canJump == false && jumpCoolDown >= 0)
         {
             jumpCoolDown -= Time.deltaTime;
-            Debug.Log(canJump);
+           // Debug.Log(canJump);
         }
         else if (canJump == false)
         {
