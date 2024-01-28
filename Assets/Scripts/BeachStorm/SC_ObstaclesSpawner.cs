@@ -6,13 +6,14 @@ public class SC_ObstaclesSpawner : MonoBehaviour
 {
     [SerializeField] Transform playerTransform;
     [SerializeField] float offsetX;
+    private int endZone = 166;
 
     public GameObject currentObstacle;
     private float spawnRate = 2;
     private float spawnRateUp = 9;
     private float spawnTimer = 0;
     private float spawnTimerUp = 0;
-    private float heightOffset = 4.5f;
+    //private float heightOffset = 4.5f;
     [SerializeField] private GameObject[] obstaclesArray;
 
 
@@ -27,7 +28,6 @@ public class SC_ObstaclesSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position = new Vector3(playerTransform.position.x + offsetX, transform.position.y, 0);
 
         if (spawnTimer < spawnRate)
         {
@@ -52,6 +52,18 @@ public class SC_ObstaclesSpawner : MonoBehaviour
         if (spawnRate <= 0.33) { spawnRate = 2; }   //reset de spawn rate
 
     }
+
+
+    private void FixedUpdate()
+    {
+        transform.position = new Vector3(playerTransform.position.x + offsetX, transform.position.y, 0);
+
+        if (transform.position.x >= endZone)
+        {
+            gameObject.SetActive(false);
+        }
+    }
+
 
     void SpawnObstacle()
     {

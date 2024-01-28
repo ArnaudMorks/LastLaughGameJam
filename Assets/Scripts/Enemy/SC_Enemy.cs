@@ -10,6 +10,8 @@ public enum EnemyState
 }
 public class Enemy : MonoBehaviour
 {
+    private DynamicPlayer dynamicPlayer;
+
     private EnemyState enemyState;
     private Animator animator;
     [SerializeField] private GameObject myGunLight;
@@ -54,6 +56,8 @@ public class Enemy : MonoBehaviour
         leftSide = this.transform.position.x - leftOfMe;
         rightSide = this.transform.position.x + rightOfMe;
         playerLocation = FindObjectOfType<SC_CharacterController2D>().transform;
+
+        dynamicPlayer = FindAnyObjectByType<DynamicPlayer>();
     }
 
     void Update()
@@ -169,6 +173,8 @@ public class Enemy : MonoBehaviour
         patrol = true;
         runSpeed = 0.4f;
         jukeboxPlaying = false;
+
+        dynamicPlayer.UnPauseMusic();
     }
     void ResetJukeBox()
     {

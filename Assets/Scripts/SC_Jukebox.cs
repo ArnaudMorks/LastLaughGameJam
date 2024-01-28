@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SC_Jukebox : MonoBehaviour
 {
+    [SerializeField] private DynamicPlayer dynamicPlayer;
+
     [SerializeField] private CapsuleCollider2D playerCollider;
     [SerializeField] private BoxCollider2D doorTrigger;
     [SerializeField] private AudioSource audioSource;
@@ -19,6 +21,7 @@ public class SC_Jukebox : MonoBehaviour
     void Start()
     {
         playerCollider = FindObjectOfType<SC_CharacterController2D>().GetComponent<CapsuleCollider2D>();
+        dynamicPlayer = FindAnyObjectByType<DynamicPlayer>();
     }
 
     void Update()
@@ -60,11 +63,15 @@ public class SC_Jukebox : MonoBehaviour
         {
             audioSource.Play();
             jukeBoxOn = true;
+
+            dynamicPlayer.PauseMusic();
         }
         else 
         {
             audioSource.Pause();
             jukeBoxOn = false;
+
+            dynamicPlayer.UnPauseMusic();
         }
     }
 
