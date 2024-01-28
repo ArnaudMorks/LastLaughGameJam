@@ -107,7 +107,7 @@ public class SC_CharacterController2D : MonoBehaviour
 
         }
 
-        if ((Input.GetKey(KeyCode.LeftControl) == false) && canStand && chrouchModeOn && isGrounded)      //als je wilt opstaan en het mag weer
+        if ((Input.GetKey(KeyCode.LeftControl) == false) && canStand && chrouchModeOn)      //als je wilt opstaan en het mag weer
         {
             StandingUp();
             print("Sta weer");
