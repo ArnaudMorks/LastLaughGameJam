@@ -11,6 +11,7 @@ public enum EnemyState
 public class Enemy : MonoBehaviour
 {
     private EnemyState enemyState;
+    private Animator animator;
 
     [SerializeField] private GameObject myLocation;
     [SerializeField] private Transform myXLocation;
@@ -48,6 +49,7 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
         // Calculate the left- and right-side of the enemy
         leftSide = this.transform.position.x - leftOfMe;
         rightSide = this.transform.position.x + rightOfMe;
@@ -185,7 +187,7 @@ public class Enemy : MonoBehaviour
         else body.velocity = new Vector2(0, body.velocity.y);
 
         
-        //animator.SetInterge("EnemyState", (int)playerState);
+        animator.SetInteger("EnemyState", (int)enemyState);
     }
     // Detects if the player enters the trigger.
     private void OnTriggerEnter2D(Collider2D collisionInfo)

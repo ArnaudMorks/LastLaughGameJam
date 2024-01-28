@@ -6,7 +6,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Aim_Standing
+  m_Name: GermanSoldier
   serializedVersion: 5
   m_AnimatorParameters: []
   m_AnimatorLayers:
@@ -33,10 +33,10 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: 8985463401965225417}
-    m_Position: {x: 390, y: -10, z: 0}
+    m_Position: {x: 320, y: 90, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 2533738974004646034}
-    m_Position: {x: 340, y: 160, z: 0}
+    m_Position: {x: 630, y: 20, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -46,7 +46,7 @@ AnimatorStateMachine:
   m_EntryPosition: {x: 70, y: 90, z: 0}
   m_ExitPosition: {x: 800, y: 120, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
-  m_DefaultState: {fileID: 2533738974004646034}
+  m_DefaultState: {fileID: 8985463401965225417}
 --- !u!1102 &2533738974004646034
 AnimatorState:
   serializedVersion: 6

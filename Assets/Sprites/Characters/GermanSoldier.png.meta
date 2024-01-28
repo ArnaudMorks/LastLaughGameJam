@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 550
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -116,7 +116,7 @@ TextureImporter:
         x: 462
         y: 1507
         width: 536
-        height: 624
+        height: 644
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -134,9 +134,9 @@ TextureImporter:
       name: March_walk02
       rect:
         serializedVersion: 2
-        x: 1429
+        x: 1233
         y: 1516
-        width: 320
+        width: 536
         height: 644
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -260,10 +260,10 @@ TextureImporter:
       name: Aim_walk01
       rect:
         serializedVersion: 2
-        x: 446
+        x: 443
         y: 802
         width: 536
-        height: 624
+        height: 644
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -281,9 +281,9 @@ TextureImporter:
       name: March_walk01
       rect:
         serializedVersion: 2
-        x: 1422
+        x: 1228
         y: 802
-        width: 320
+        width: 536
         height: 644
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -410,7 +410,7 @@ TextureImporter:
         x: 414
         y: 77
         width: 536
-        height: 624
+        height: 644
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -428,9 +428,9 @@ TextureImporter:
       name: March_standing
       rect:
         serializedVersion: 2
-        x: 1422
+        x: 1228
         y: 72
-        width: 320
+        width: 536
         height: 644
       alignment: 0
       pivot: {x: 0.5, y: 0.5}

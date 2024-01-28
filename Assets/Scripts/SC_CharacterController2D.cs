@@ -27,7 +27,7 @@ public class SC_CharacterController2D : MonoBehaviour
     //private SpriteRenderer sr; // Variable for the SpriteRenderer component.
     //public Transform transform;
     private PlayerState playerState;
-    private Animator animator; // Variable for the Animator component. [OPTIONAL]
+    private Animator animator; // Variable for the Animator component
 
     private bool canLand = false;     //voor als die geland is
     private bool isGrounded; // Variable that will check if character is on the ground.
