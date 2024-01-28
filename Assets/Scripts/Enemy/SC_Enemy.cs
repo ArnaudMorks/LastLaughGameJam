@@ -12,7 +12,7 @@ public class Enemy : MonoBehaviour
 {
     private EnemyState enemyState;
     private Animator animator;
-
+    [SerializeField] private GameObject myGunLight;
     [SerializeField] private GameObject myLocation;
     [SerializeField] private Transform myXLocation;
     [SerializeField] private Transform playerLocation;
@@ -202,6 +202,7 @@ public class Enemy : MonoBehaviour
         if (collisionInfo.CompareTag("Player"))
         {
             playerSpotted = true;
+            myGunLight.SetActive(true);
             runSpeed = 2.6f;
             enemyState = EnemyState.shooting;
         }
