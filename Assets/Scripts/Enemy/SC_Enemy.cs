@@ -2,8 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum EnemyState
+{
+    idle = 0,
+    walking,
+    shooting
+}
 public class Enemy : MonoBehaviour
 {
+    private EnemyState enemyState;
+
     [SerializeField] private GameObject myLocation;
     [SerializeField] private Transform myXLocation;
     [SerializeField] private Transform playerLocation;
@@ -23,9 +31,19 @@ public class Enemy : MonoBehaviour
     [SerializeField] private GameObject nearJukeBox;
     [SerializeField] private AudioSource nearJukeBoxAudio;
     [SerializeField] private SC_Jukebox sc_juke;
+    private bool jukeboxdelay = false;
     private bool dancingQueen;
     public bool jukeboxPlaying = false;
-
+    /* Random Idle Explain
+    1 = Always   
+    2 = 50% every 2 sec 2 sec idle
+    3 = 33% every 2 sec 2 sec idle              |
+    4 = 25% every 2 sec 2 sec idle              |
+    Enz enz                                    \ /
+    */
+    [SerializeField] private int randomChance = 1; 
+    private bool allowRandom = true;
+    private float randomChecker;
 
     void Start()
     {
@@ -56,6 +74,13 @@ public class Enemy : MonoBehaviour
             JukeboxStuff();
         }
 
+        if (allowRandom)
+        {
+            allowRandom = false;
+            Invoke("RandomStandstill", 2f);
+        }
+
+
         if (patrol == true && playerSpotted == false)
         {
             if (myCurrentXLocation < rightSide && goLeft == true)
@@ -76,6 +101,21 @@ public class Enemy : MonoBehaviour
             }
         }
     }
+    void RandomStandstill()
+    {
+        randomChecker = Random.Range(0, randomChance);
+        if (randomChecker == 0)
+        {
+            enemyState = EnemyState.idle;
+            patrol = false;
+            allowRandom = true;
+        }
+        else if(randomChecker != 0)
+        {
+            patrol = true;
+            allowRandom = true;
+        }
+    }
     void JukeboxStuff()
     {
         jukeboxPlaying = sc_juke.JukeBoxOn;
@@ -83,24 +123,33 @@ public class Enemy : MonoBehaviour
         if (jukeboxPlaying && dancingQueen)
         {
             runSpeed = 2f;
-            if (myCurrentXLocation <= (nearJukeBox.transform.position.x + 0.2f) && myCurrentXLocation >= (nearJukeBox.transform.position.x - 0.2f))
+            if (jukeboxdelay == false)
+            {
+                Invoke("jukeboxDelay", 2f);
+            }
+            else if (myCurrentXLocation <= (nearJukeBox.transform.position.x + 0.2f) && myCurrentXLocation >= (nearJukeBox.transform.position.x - 0.2f) && jukeboxdelay)
             {
                 goingLeft = false;
                 goingRight = false;
                 dancingQueen = false;
                 patrol = false;
+                enemyState = EnemyState.idle;
                 Invoke("TurnItOff", 5f);
                 Invoke("ResetJukeBox", 5.1f);
             }
-            else if (myCurrentXLocation > nearJukeBox.transform.position.x - 0.3f)
+            else if (myCurrentXLocation > nearJukeBox.transform.position.x - 0.3f && jukeboxdelay)
             {
                 goingLeft = true;
             }
-            else if (myCurrentXLocation < nearJukeBox.transform.position.x + 0.3f)
+            else if (myCurrentXLocation < nearJukeBox.transform.position.x + 0.3f && jukeboxdelay)
             {
                 goingRight = true;
             }
         }
+    }
+    void jukeboxDelay()
+    {
+        jukeboxdelay = true;
     }
     void TurnItOff()
     {
@@ -113,6 +162,7 @@ public class Enemy : MonoBehaviour
     void ResetJukeBox()
     {
         nearJukeBoxAudio.enabled = true;
+        jukeboxdelay = false;
     }
 
     void FixedUpdate()
@@ -123,14 +173,19 @@ public class Enemy : MonoBehaviour
             body.velocity = new Vector2(-runSpeed, body.velocity.y);
             transform.eulerAngles = new Vector3(transform.eulerAngles.x, 180, transform.eulerAngles.z); 
             goingLeft = false;
+            enemyState = EnemyState.walking;
         }
         else if (goingRight)
         {
             body.velocity = new Vector2(runSpeed, body.velocity.y);
             transform.eulerAngles = new Vector3(transform.eulerAngles.x, 0, transform.eulerAngles.z);
             goingRight = false;
+            enemyState = EnemyState.walking;
         }
         else body.velocity = new Vector2(0, body.velocity.y);
+
+        
+        //animator.SetInterge("EnemyState", (int)playerState);
     }
     // Detects if the player enters the trigger.
     private void OnTriggerEnter2D(Collider2D collisionInfo)
@@ -139,6 +194,7 @@ public class Enemy : MonoBehaviour
         {
             playerSpotted = true;
             runSpeed = 2.6f;
+            enemyState = EnemyState.shooting;
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
@@ -149,4 +205,5 @@ public class Enemy : MonoBehaviour
             runSpeed = 1.6f;
         }
     }
+
 }
