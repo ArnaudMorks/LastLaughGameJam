@@ -113,8 +113,8 @@ TextureImporter:
       name: Aim_walk02
       rect:
         serializedVersion: 2
-        x: 462
-        y: 1507
+        x: 460
+        y: 1508
         width: 536
         height: 644
       alignment: 0
@@ -407,8 +407,8 @@ TextureImporter:
       name: Aim_Standing
       rect:
         serializedVersion: 2
-        x: 414
-        y: 77
+        x: 424
+        y: 78
         width: 536
         height: 644
       alignment: 0
